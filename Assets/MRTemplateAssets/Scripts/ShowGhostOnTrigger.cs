@@ -1,17 +1,31 @@
 using UnityEngine;
 
-public class ShowGhostOnTrigger : MonoBehaviour
+public class GhostTrigger : MonoBehaviour
 {
-    public GameObject ghost;
-    public string playerTag = "Player";
+    public GameObject ghost;        // drag your ghost object here in Inspector
+    public string playerTag = "Player";  // tag for your mocopi avatar
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(playerTag)) ghost.SetActive(true);
+        if (other.CompareTag(playerTag))
+        {
+            // turn ghost on when player touches bench
+            ghost.SetActive(true);
+            Debug.Log("Ghost appeared!");
+        }
+        else
+        {
+            Debug.Log("Something else entered");
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(playerTag)) ghost.SetActive(false);
+        if (other.CompareTag(playerTag))
+        {
+            // hide ghost again when player leaves
+            ghost.SetActive(false);
+            Debug.Log("Ghost disappeared!");
+        }
     }
 }

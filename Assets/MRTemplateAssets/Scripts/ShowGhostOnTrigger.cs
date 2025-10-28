@@ -1,31 +1,23 @@
 using UnityEngine;
-
-public class GhostTrigger : MonoBehaviour
+public class ShowGhostOnTrigger : MonoBehaviour
 {
-    public GameObject ghost;        // drag your ghost object here in Inspector
-    public string playerTag = "Player";  // tag for your mocopi avatar
+    [SerializeField] GameObject ghostRoot;
+    [SerializeField] bool oneShot = true;
+    bool shown;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(playerTag))
-        {
-            // turn ghost on when player touches bench
-            ghost.SetActive(true);
-            Debug.Log("Ghost appeared!");
-        }
-        else
-        {
-            Debug.Log("Something else entered");
-        }
+        Debug.Log($"[SGOT] enter by {other.name} tag={other.tag}");
+        if (!other.CompareTag("Player")) return;
+        if (oneShot && shown) return;
+        if (!ghostRoot) { Debug.LogWarning("[SGOT] ghostRoot not set"); return; }
+        ghostRoot.SetActive(true);
+        shown = true;
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(playerTag))
-        {
-            // hide ghost again when player leaves
-            ghost.SetActive(false);
-            Debug.Log("Ghost disappeared!");
-        }
+        if (!other.CompareTag("Player") || oneShot || !ghostRoot) return;
+        ghostRoot.SetActive(false);
     }
 }

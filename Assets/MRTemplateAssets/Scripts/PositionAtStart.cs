@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PositionAtStart : MonoBehaviour
+public class BenchProximityTrigger : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("The starting target.")]

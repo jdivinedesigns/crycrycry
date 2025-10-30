@@ -12,6 +12,7 @@ Material:
   m_Parent: {fileID: 2100000, guid: 17da561b15f3d436ebbd0b045d5e9166, type: 2}
   m_ModifiedSerializedProperties: 2
   m_ValidKeywords:
+  - _NORMALMAP
   - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_InvalidKeywords: []
   m_LightmapFlags: 4

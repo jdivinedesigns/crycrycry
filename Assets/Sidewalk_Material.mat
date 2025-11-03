@@ -54,9 +54,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _Metallic: 0
-    - _Smoothness: 0.742
+    - _Smoothness: 0.162
     - _SmoothnessTextureChannel: 1
     m_Colors:
-    - _BaseColor: {r: 0.6320754, g: 0.617168, b: 0.617168, a: 1}
-    - _Color: {r: 0.6320754, g: 0.617168, b: 0.617168, a: 1}
+    - _BaseColor: {r: 0.4811321, g: 0.44708973, b: 0.44708973, a: 1}
+    - _Color: {r: 0.4811321, g: 0.44708973, b: 0.44708973, a: 1}
   m_BuildTextureStacks: []

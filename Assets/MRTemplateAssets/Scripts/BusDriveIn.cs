@@ -4,63 +4,50 @@ using UnityEngine;
 
 public class BusDriveIn : MonoBehaviour
 {
-    [Header("Path")]
-    public Transform pointIn;
-    public Transform pointStop;
-    public Transform pointOut;
+    [Header("Path (X values only)")]
+    public float startX = -50f;     // where bus begins (off-screen right)
+    public float stopX = 0f;       // where it stops (bus stop position)
+    public float endX = 50f;      // where it exits (off-screen left)
 
     [Header("Timing")]
-    public float inSpeed = 6f;      // m/s moving in & to stop
-    public float outSpeed = 8f;     // m/s when leaving
-    public float dwellSeconds = 3f; // how long it waits at the stop
-    public AnimationCurve ease = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    public float inSpeed = 6f;
+    public float outSpeed = 8f;
+    public float dwellSeconds = 3f;
     public bool autoPlayOnStart = false;
 
-    Coroutine running;
+    Coroutine routine;
 
     void Start()
     {
         if (autoPlayOnStart) Play();
-        // optional: start exactly at pointIn
-        if (pointIn) transform.position = pointIn.position;
+        Vector3 pos = transform.position;
+        transform.position = new Vector3(startX, pos.y, pos.z); // ensure starting X
     }
 
     public void Play()
     {
-        if (running != null) StopCoroutine(running);
-        running = StartCoroutine(Run());
+        if (routine != null) StopCoroutine(routine);
+        routine = StartCoroutine(Drive());
     }
 
-    IEnumerator Run()
+    IEnumerator Drive()
     {
-        if (pointIn) yield return MoveTo(pointIn.position, inSpeed);
-        if (pointStop) yield return MoveTo(pointStop.position, inSpeed);
+        yield return MoveX(stopX, inSpeed);
         yield return new WaitForSeconds(dwellSeconds);
-        if (pointOut) yield return MoveTo(pointOut.position, outSpeed);
-        running = null;
+        yield return MoveX(endX, outSpeed);
     }
 
-    IEnumerator MoveTo(Vector3 dest, float speed)
+    IEnumerator MoveX(float targetX, float speed)
     {
-        Vector3 start = transform.position;
-        float dist = Vector3.Distance(start, dest);
-        float dur = dist / Mathf.Max(0.01f, speed);
-        float t = 0f;
-
-        while (t < 1f)
+        Vector3 pos = transform.position;
+        float dir = Mathf.Sign(targetX - pos.x);
+        while ((dir > 0 && pos.x < targetX) || (dir < 0 && pos.x > targetX))
         {
-            t += Time.deltaTime / dur;
-            float k = ease.Evaluate(Mathf.Clamp01(t));
-            transform.position = Vector3.Lerp(start, dest, k);
-
-            // face movement direction (yaw only)
-            Vector3 dir = (dest - transform.position); dir.y = 0f;
-            if (dir.sqrMagnitude > 0.0001f)
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 10f * Time.deltaTime);
-
+            pos.x += dir * speed * Time.deltaTime;
+            transform.position = pos;
             yield return null;
         }
-
-        transform.position = dest;
+        pos.x = targetX;
+        transform.position = pos;
     }
 }

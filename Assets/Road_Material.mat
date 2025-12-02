@@ -10,7 +10,7 @@ Material:
   m_Name: Road_Material
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: 17da561b15f3d436ebbd0b045d5e9166, type: 2}
-  m_ModifiedSerializedProperties: 2
+  m_ModifiedSerializedProperties: 18
   m_ValidKeywords:
   - _NORMALMAP
   - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
@@ -18,7 +18,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2007
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses: []
@@ -28,12 +28,13 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Metallic: 0.893
-    - _Smoothness: 0.117
+    - _Metallic: 0.339
+    - _QueueOffset: 7
+    - _Smoothness: 0.18
     - _SmoothnessTextureChannel: 1
     m_Colors:
-    - _BaseColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
-    - _Color: {r: 0.18867919, g: 0.18867919, b: 0.18867919, a: 1}
+    - _BaseColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+    - _Color: {r: 0.16981128, g: 0.16981128, b: 0.16981128, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3819434523541897877
 MonoBehaviour:

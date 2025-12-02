@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8243c2e79a0c146499ecc79de068a065
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - phoneOnHook: {fileID: 919132149155446097, guid: 755f46ee809434771960d685b7af01ff, type: 3}
+  - phoneInHandRoot: {instanceID: 0}
+  - rightHandSocket: {instanceID: 0}
+  - leftHandSocket: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

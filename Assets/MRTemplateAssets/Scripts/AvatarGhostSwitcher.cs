@@ -3,9 +3,9 @@ using UnityEngine;
 public class AvatarGhostSwitcher : MonoBehaviour
 {
     [Header("References")]
-    public GameObject avatarRoot;      // normal player (readyplayme busstop)
-    public GameObject ghostRoot;       // SF_ghost2 (1)
-    public Transform matchFrom;        // optional: usually hips; can leave empty
+    public GameObject avatarRoot;   // normal player (readyplayme busstop)
+    public GameObject ghostRoot;    // SF_ghost2 (1)
+    public Transform matchFrom;     // usually Hips
 
     [Header("Options")]
     public bool once = true;
@@ -14,7 +14,7 @@ public class AvatarGhostSwitcher : MonoBehaviour
 
     void Start()
     {
-        // make sure we start in human form
+        // start in human form
         if (avatarRoot) avatarRoot.SetActive(true);
         if (ghostRoot) ghostRoot.SetActive(false);
     }
@@ -25,23 +25,24 @@ public class AvatarGhostSwitcher : MonoBehaviour
         if (once && hasSwitched) return;
         hasSwitched = true;
 
-        // decide what transform we match from
-        Transform src = matchFrom;
-        if (!src && avatarRoot)
-            src = avatarRoot.transform;
+        // choose source transform: Hips if set, else avatar root
+        Transform src = matchFrom != null ? matchFrom : avatarRoot.transform;
 
         if (ghostRoot && src)
         {
             Transform gt = ghostRoot.transform;
+
+            // put ghost where the player's hips currently are
             gt.position = src.position;
             gt.rotation = src.rotation;
             gt.localScale = src.localScale;
         }
 
-        // swap active roots
+        // swap active objects
         if (avatarRoot) avatarRoot.SetActive(false);
         if (ghostRoot) ghostRoot.SetActive(true);
 
-        Debug.Log("[AvatarGhostSwitcher] Switched to ghost + matched transform.");
+        Debug.Log("[AvatarGhostSwitcher] Switched to ghost + matched hips transform.");
     }
 }
+

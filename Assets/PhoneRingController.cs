@@ -81,13 +81,12 @@ public class PhoneRingController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // simplest: whole avatar triggers pickup
-        if (other.CompareTag("Player"))
+        Debug.Log("Phone trigger hit by: " + other.name + " tag: " + other.tag);
+
+        // Hand OR full avatar root can trigger pickup
+        if (other.CompareTag("PlayerHand") || other.CompareTag("Player"))
         {
             OnPhonePickedUp();
         }
-
-        // If you want only the hand, use:
-        // if (other.CompareTag("PlayerHand")) OnPhonePickedUp();
     }
 }
